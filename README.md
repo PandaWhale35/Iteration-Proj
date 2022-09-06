@@ -1,9 +1,9 @@
-# pt-conf
+# Pt-conf
 Scheduler - PTA Conference
 
 #### Code Owners
-- Luis Navarro
-- Michael Lam
-- Rami Abdelghafar
-- Serena Amos
-- Anshuman Sinha
+- Adam Seery
+- Marco Gonzalez
+- Juan Kang
+- Yuehao Wong
+
