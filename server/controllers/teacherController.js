@@ -35,7 +35,7 @@ teacherController.getTeacher = async (req, res, next) => {
 
 
 //get appointments
-///assuming this is finding teacher available time slots by teacher id stored on parent => child
+///assuming this is finding teacher available time slots by teacher id stored on parent => child then sending back name and taken slots
 
 teacherController.getAppointments = async(req, res, next) => {
   const {teacherId} = req.body;
@@ -45,6 +45,7 @@ teacherController.getAppointments = async(req, res, next) => {
   });
 
   res.locals.teacherinfo = {teacherName: foundTeacher.teacherName, appointments: foundTeacher.appoinment};
+  res.locals.teacherdoc = foundTeacher;
   return next();
 };
 
@@ -57,7 +58,7 @@ teacherController.getAppointments = async(req, res, next) => {
 
 teacherController.updateAppointment = async(req,res,next)=>{
     const {type} = req.body.type;
-    const {appointments} = res.locals.teacherinfo;
+    const {appointment} = res.locals.teacherdoc;
 
     ///if type delete pull file
 

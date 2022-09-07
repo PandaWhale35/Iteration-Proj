@@ -20,4 +20,13 @@ router.get('/login', teacherController.getTeacher, (req, res) =>{
 router.get('/findteacher', teacherController.getAppointments, (req, res) =>{
   return res.status(200).json(res.locals.teacherinfo);
 });
+
+
+router.post('/updatetimes', teacherController.getAppointments, teacherController.updateAppointment, (req, res)=>{
+    return res.status(200).json(res.locals.teacherinfo);
+})
+
+
+
+
 module.exports = router;
