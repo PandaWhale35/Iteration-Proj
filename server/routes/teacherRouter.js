@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 //insert teacher controller
-//const teacherController = require('../controllers/teacherController');
+const teacherController = require('../controllers/teacherController');
 
 
 
@@ -18,6 +18,6 @@ router.get('/login', teacherController.getTeacher, (req, res) =>{
 
 //find teacher
 router.get('/findteacher', teacherController.getAppointments, (req, res) =>{
-    return res.status(200).json(res.locals.teacher);
-  });
+  return res.status(200).json(res.locals.teacherinfo);
+});
 module.exports = router;

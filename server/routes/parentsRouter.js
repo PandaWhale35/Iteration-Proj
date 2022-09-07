@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 //insert parent controller
-//const parentController = require('../controllers/parentController');
+const parentController = require('../controllers/parentController');
 
 
 
