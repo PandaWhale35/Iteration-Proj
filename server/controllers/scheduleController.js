@@ -1,20 +1,22 @@
-const { isValidObjectId } = require("mongoose");
-const { ParentUser, validate } = require("../models/parentModel.js");
-const Student = require("../models/studentModel.js");
-const Teacher = require("../models/teacherModel");
-const bcrypt = require("bcrypt");
+const { isValidObjectId } = require('mongoose');
+const { ParentUser, validate } = require('../models/parentModel.js');
+const Student = require('../models/studentModel.js');
+const Teacher = require('../models/teacherModel');
+const bcrypt = require('bcrypt');
 //validate function using Joi
-const Joi = require("joi");
+const Joi = require('joi');
 
 const scheduleController = {
   idAuthentication(req, res, next) {},
 
   async addTeacher(req, res, next) {
     try {
-      const newTeacher = await new Teacher(req.body).save();
+      console.log('in id auth', JSON.stringify(req.body));
+      const newTeacher = await  Teacher.create(req.body);
       res.status(201).send(newTeacher);
+      return next()
     } catch (error) {
-      res.status(400).send({ message: "Internal Server Error" });
+      res.status(400).send({ message: 'Internal Server Error' });
     }
   },
 
@@ -23,7 +25,7 @@ const scheduleController = {
       const teachers = await Teacher.find({});
       res.status(201).send(teachers);
     } catch (error) {
-      res.status(400).send({ message: "Internal Server Error" });
+      res.status(400).send({ message: 'Internal Server Error' });
     }
   },
 
@@ -32,7 +34,7 @@ const scheduleController = {
       const parents = await ParentUser.find({});
       res.status(201).send(parents);
     } catch (error) {
-      res.status(400).send({ message: "Internal Server Error :)" });
+      res.status(400).send({ message: 'Internal Server Error :)' });
     }
   },
 
@@ -41,7 +43,7 @@ const scheduleController = {
       const newStudent = await new Student(req.body).save();
       res.status(201).send(newStudent);
     } catch (error) {
-      res.status(400).send({ message: "Internal Server Error" });
+      res.status(400).send({ message: 'Internal Server Error' });
     }
   },
 
@@ -50,7 +52,7 @@ const scheduleController = {
       const students = await Student.find({}); //finds all students
       res.status(201).send(students);
     } catch (error) {
-      res.status(400).send({ message: "Internal Server Error" });
+      res.status(400).send({ message: 'Internal Server Error' });
     }
   },
 
@@ -58,8 +60,8 @@ const scheduleController = {
     try {
       const validate = (data) => {
         const schema = Joi.object({
-          email: Joi.string().email().required().label("Email"),
-          password: Joi.string().required().label("Password"),
+          email: Joi.string().email().required().label('Email'),
+          password: Joi.string().required().label('Password'),
         });
         return schema.validate(data);
       };
@@ -71,14 +73,14 @@ const scheduleController = {
       if (!user)
         return res
           .status(401)
-          .send({ message: "Invalid Email or Password IM FIRST!!!" });
+          .send({ message: 'Invalid Email or Password IM FIRST!!!' });
 
       const validPassword = await bcrypt.compare(
         req.body.password,
         user.password
       );
       if (!validPassword)
-        return res.status(401).send({ message: "Invalid Email or Password" });
+        return res.status(401).send({ message: 'Invalid Email or Password' });
 
       //const token = user.generateAuthToken(); data: token,
 
@@ -87,19 +89,19 @@ const scheduleController = {
       const studentsTeacher = await Teacher.findOne({
         studentId: currentStudentId,
       });
-      console.log("hello", studentsTeacher);
+      console.log('hello', studentsTeacher);
       const studentPerson = await Student.findOne({
         studentId: currentStudentId,
       });
 
-      console.log("logged->>", studentPerson.firstName);
+      console.log('logged->>', studentPerson.firstName);
       res.status(200).send({
-        message: "Logged in successfully",
+        message: 'Logged in successfully',
         studentName: `${studentPerson.firstName} ${studentPerson.lastName}`,
         teacherData: [studentsTeacher.teacherName],
       });
     } catch (error) {
-      res.status(500).send({ message: "Internal Servor Error HERE!!!!!!!" });
+      res.status(500).send({ message: 'Internal Servor Error HERE!!!!!!!' });
     }
   },
 
@@ -114,7 +116,7 @@ const scheduleController = {
       if (parents)
         return res
           .status(409)
-          .send({ message: "Account with that email address already exists" });
+          .send({ message: 'Account with that email address already exists' });
 
       const salt = await bcrypt.genSalt(Number(process.env.SALT)); //hashing password via encrypting
       const hashPassword = await bcrypt.hash(req.body.password, salt); //you are sending the email and password via req.body.email && req.body.password. We are hasing passowrd received from req.body with salt.
@@ -126,7 +128,7 @@ const scheduleController = {
 
       res.status(201).send(newParent);
     } catch (error) {
-      res.status(500).send({ message: "Internal Server Error" });
+      res.status(500).send({ message: 'Internal Server Error' });
     }
   },
 };

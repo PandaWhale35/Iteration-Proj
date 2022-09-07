@@ -12,8 +12,7 @@ const teacherRouter = require('./routers/teacherRouter');
 
 const PORT = 3000;
 
-// update with new remote MongoDB
-mongoose.connect('mongodb://localhost:27017/addressed', {
+mongoose.connect('mongodb://localhost/Users', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -32,6 +31,9 @@ app.use ('/parents')
 
 //------------------------get requests to send info to front end
 
+// app.get("/", (req, res) => {
+//   return res.status(200).sendFile(path.join(__dirname, "../client/index.html"));
+// });
 
 //I don't think the following 3 gets are needed
 // app.get('/', (req, res) => {
