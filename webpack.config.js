@@ -68,7 +68,11 @@ const config = {
      * to localhost:3000/api/* (where our Express server is running)
      */
     proxy: {
-      '/api': {
+      '/parents': {
+        target: 'http://localhost:3000/',
+        // secure: false,
+      },
+      '/teacher': {
         target: 'http://localhost:3000/',
         // secure: false,
       },

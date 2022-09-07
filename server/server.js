@@ -6,8 +6,8 @@ const path = require('path');
 // const scheduleController = require('./controllers/scheduleController.js');
 
 //Import new routers for parents and teachers
-const parentRouter = require('./routers/parentRouter');
-const teacherRouter = require('./routers/teacherRouter');
+const parentsRouter = require('./routes/parentsRouter');
+const teacherRouter = require('./routes/teacherRouter');
 
 
 const PORT = 3000;
@@ -24,10 +24,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 
-app.use ('/parents')
-// No longer using scheduleRouter
-// const scheduleRouter = express.Router();
-// app.use('/api', scheduleRouter);
+app.use ('/parents', parentsRouter);
+app.use ('/teacher', teacherRouter);
+
+
 
 //------------------------get requests to send info to front end
 
@@ -61,30 +61,6 @@ app.use ('/parents')
 //   return res.redirect('/frontPage');
 
 // });
-
-// Move to parents and teacher router. 
-// Separate signup for teachers and parents
-// scheduleRouter.post(
-//   '/signup',
-//   scheduleController.idAuthentication,
-//   (req, res) => {
-//     return res.status(200).json(res.locals.student);
-//   }
-// );
-
-//Worked with 3000/api/teachers!
-//Move to teachers router. Is add teacher necessary for MvP?
-// scheduleRouter.post('/teachers', scheduleController.addTeacher);
-// scheduleRouter.get('/teachers', scheduleController.getTeachers);
-
-// Move to parents router
-// scheduleRouter.get('/parents', scheduleController.getParents);
-//Parents Login and Signup
-
-// scheduleRouter.post('/parents/signup', scheduleController.parentSignup);
-// scheduleRouter.post('/parents/login', scheduleController.parentLogin);
-// // scheduleRouter.get("/parents/signup", scheduleController.parentSignup);
-// scheduleRouter.get('/parents/login', scheduleController.parentLogin);
 
 //Create new student
 
