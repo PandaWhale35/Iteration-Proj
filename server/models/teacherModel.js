@@ -9,8 +9,9 @@ const teacherSchema = new Schema ({
   email: { type: String, required: true },
   password: {type: String, required: true},
   //make this appointment slot an object. This way, on a post request from the parent trying to create an appointment, we know what time they selected and who is selecting it?
-  appointment: [ 
-    {type: String, unique: true}
+  appointment: [ {time : {type: String, unique: true} , 
+    childName: String, 
+    parentName: String }
   ]
 });
 
