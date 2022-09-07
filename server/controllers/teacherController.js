@@ -11,8 +11,6 @@ teacherController.addTeacher = async (req, res, next) => {
     email: email,
     password: password,
     teacherId: teacherId
-  },(err)=>{
-    if(err) return next({message: `${err}: error occured while creating teacher`});
   });
   res.locals.teacher = newTeacher;
   return next();
@@ -23,9 +21,7 @@ teacherController.getTeacher = async (req, res, next) => {
 
   const {email, password} = req.body;
   
-  const foundTeacher = await Teacher.findOne({email: email}, (err, teacher)=>{
-    if(err || teacher === null) return next({message: `${err} invalid email, error finding teacher`});
-  });
+  const foundTeacher = await Teacher.findOne({email: email});
   
   if(foundTeacher.password !== password) return next({message: 'invalid password'});
   
@@ -40,9 +36,7 @@ teacherController.getTeacher = async (req, res, next) => {
 teacherController.getAppointments = async(req, res, next) => {
   const {teacherId} = req.body;
 
-  const foundTeacher = await Teacher.findOne({teacherId: teacherId},(err, teacher)=>{
-    if(err || teacher === null) return next({message: `${err} invalid teacher id, error finding teacher`});
-  });
+  const foundTeacher = await Teacher.findOne({teacherId: teacherId});
 
   res.locals.teacherinfo = {teacherName: foundTeacher.teacherName, appointments: foundTeacher.appoinment};
   res.locals.teacherdoc = foundTeacher;
@@ -65,7 +59,7 @@ teacherController.updateAppointment = async(req,res,next)=>{
     //if type push than push file
 
 
-
+ 
     //send updated teacher info
     //res.locals.teacherinfo = name & updated appointments
 }

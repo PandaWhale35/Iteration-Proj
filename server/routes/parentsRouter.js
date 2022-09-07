@@ -12,7 +12,8 @@ router.post('/signup', parentController.addParent, (req, res)=>{
 });
 
 //parent login
-router.get('/login', parentController.getParent, (req, res) =>{
+router.post('/login', parentController.getParent, (req, res) =>{
+  console.log('hello from parent login');
   return res.status(200).json(res.locals.parent);
 });
 

@@ -21,23 +21,30 @@ const Login = (props) => {
     // dispatch(loginSuccess(payload));
     // navigate('/schedule');
 
-    fetch('/api/parents/login', {
+    //to get data adam
+    //e.target.emailforform
+    //e.target.password
+    const body = {
+      email: e.target.emailforForm.value,
+      password: e.target.password.value
+    };
+    fetch('/parents/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: {
-        email: e.email, 
-        password: e.password
-      }
-    }).then((res) => { 
-      if (res.message === 'error') loginError();
-      else {
-        const payload = { studentName: res.studentName, teacherData: res.teacherData };
-        dispatch(loginSuccess(payload));
-        navigate('/schedule');
-      }
-    });
+      body: JSON.stringify(body)
+
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.message === 'error') loginError();
+        else {
+          const payload = { studentName: res.studentName, teacherData: res.teacherData };
+          // dispatch(loginSuccess(payload));
+          navigate('/schedule');
+        }
+      });
   };
 
 

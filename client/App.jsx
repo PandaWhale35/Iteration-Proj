@@ -13,11 +13,8 @@ class App extends Component {
       // <h1>Welcome to PT Conferences</h1>
       <Router> {/* SA This enables routing from login/signup page to schedule page without sending a request to the server */}
         <Routes>
-          <Route
-            exact
-            path="/"
-            element={<HomeContainer login={login} signup={signup} />}
-          />
+          <Route exact path="/" element={<HomeContainer login={login} signup={signup} />} />
+          
           <Route exact path="/schedule" element={<MainContainer studentId={'studentId'}/>} />
         </Routes>
       </Router>
