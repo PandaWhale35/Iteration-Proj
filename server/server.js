@@ -3,16 +3,14 @@ const app = express();
 const mongoose = require("mongoose");
 const path = require("path");
 const scheduleController = require("./controllers/scheduleController.js");
-
-const app = express();
 const PORT = 3000;
 
-mongoose.connect("mongodb://localhost:27017/addressed", {
+mongoose.connect("mongodb+srv://iteration:project@iteration.b4cwddb.mongodb.net/?retryWrites=true&w=majority", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 mongoose.connection.once("open", () => {
-  console.log("Connected to Database");
+  console.log("Connected to MongoDB");
 });
 
 app.use(express.urlencoded({ extended: true }));
@@ -24,7 +22,7 @@ app.use("/api", scheduleRouter);
 //------------------------get requests to send info to front end
 
 app.get("/", (req, res) => {
-  return res.status(200).sendFile(path.join(__dirname, "../client/index.html"));
+  return res.status(200).send("WELOME TO THE BACKEND")
 });
 
 app.get("/stylesheets/style.scss", (req, res) => {

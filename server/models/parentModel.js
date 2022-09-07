@@ -10,11 +10,14 @@ const passwordComplexity = require("joi-password-complexity");
 const jwt = require("jsonwebtoken");
 
 const parentSchema = new Schema({
-  //firstName: { type: String, required: false },
-  //lastName: { type: String, required: false },
+  parentName: { type: String, required: true },
   email: { type: String, required: true }, //How can we implement username?
   password: { type: String, required: true },
-  studentId: { type: String, required: true },
+  childInfo: [{ 
+    childName: { type: String, required: true },
+    studentId: { type: Number, required: true },
+    teacherId : {type: Number, required: true}
+  }],
 });
 //https://www.ibm.com/docs/en/aix/7.2?topic=files-env-file about.ENV
 parentSchema.methods.generateAuthToken = () => {
