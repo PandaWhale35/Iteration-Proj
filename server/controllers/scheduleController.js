@@ -131,4 +131,4 @@ const scheduleController = {
   },
 };
 
-// module.exports = scheduleController;
+module.exports = scheduleController;
