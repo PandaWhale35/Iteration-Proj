@@ -5,7 +5,7 @@ const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 
 const config = {
   entry: './client/index.js',
-  devtool: 'inline-source-map',
+  devtool: 'eval-source-map',
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js'
@@ -51,11 +51,11 @@ const config = {
     host: 'localhost',
     port: 8080,
     // match the output path
-    static: {
-      directory: path.resolve(__dirname, 'dist'),
-      // match the output 'publicPath'
-      publicPath: '/',
-    },
+    // static: {
+    //   directory: path.resolve(__dirname, 'dist'),
+    //   // match the output 'publicPath'
+    //   publicPath: '/',
+    // },
     // enable HMR on the devServer
     hot: true,
     // fallback to root for other urls

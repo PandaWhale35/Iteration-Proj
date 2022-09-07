@@ -10,7 +10,7 @@ const Signup = (props) =>  {
   const submitPostRequest = (e) => {
     if (e.password !== e.confirmPassword) passwordError();
     else {
-      fetch('/api/parents/singup', {
+      fetch('/api/parents/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

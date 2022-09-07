@@ -12,19 +12,19 @@ router.post('/signup', teacherController.addTeacher, (req, res)=>{
 });
 
 //teacher login
-router.get('/login', teacherController.getTeacher, (req, res) =>{
+router.post('/login', teacherController.getTeacher, (req, res) =>{
   return res.status(200).json(res.locals.teacher);
 });
 
 //find teacher
-router.get('/findteacher', teacherController.getAppointments, (req, res) =>{
+router.post('/findteacher', teacherController.getAppointments, (req, res) =>{
   return res.status(200).json(res.locals.teacherinfo);
 });
 
 
 router.post('/updatetimes', teacherController.getAppointments, teacherController.updateAppointment, (req, res)=>{
-    return res.status(200).json(res.locals.teacherinfo);
-})
+  return res.status(200).json(res.locals.teacherinfo);
+});
 
 
 

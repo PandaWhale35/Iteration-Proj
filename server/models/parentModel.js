@@ -27,7 +27,7 @@ parentSchema.methods.generateAuthToken = () => {
   return token;
 };
 
-const ParentUser = mongoose.model("parent", parentSchema);
+const ParentUser = mongoose.model('parent', parentSchema);
 
 const validate = (data) => {
   const schema = Joi.object({
