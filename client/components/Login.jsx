@@ -5,6 +5,7 @@ import SchoolIcon from '@mui/icons-material/School';
 import Error from './Error';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { loginSuccess } from '../reducers/scheduleReducers';
+import {teacherSuccess} from '../reducers/scheduleReducers';
 
 const Login = (props) => {
 
@@ -58,7 +59,7 @@ const Login = (props) => {
         .then(res => {
           const payload = { teacherName: res.teacherName, appointment: res.appointment };
           console.log(payload);
-          // dispatch(loginSuccess(payload));
+          dispatch(teacherSuccess(payload));
           return; // navigate('/schedule');
         })
         .catch(err => {

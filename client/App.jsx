@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import HomeContainer from './containers/HomeContainer';
 import { MainContainer } from './containers/MainContainer';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import{ TeacherContainer} from './containers/TeacherContainer'
 class App extends Component {
   constructor() {
     super();
@@ -15,7 +16,9 @@ class App extends Component {
         <Routes>
           <Route exact path="/" element={<HomeContainer login={login} signup={signup} />} />
           
-          <Route exact path="/schedule" element={<MainContainer studentId={'studentId'}/>} />
+          {/* <Route exact path="/schedule" element={<MainContainer studentId={'studentId'}/>} /> */}
+          <Route exact path="/schedule" element={<TeacherContainer />} />
+         
         </Routes>
       </Router>
       // <HomeContainer login={login} signup={signup} />

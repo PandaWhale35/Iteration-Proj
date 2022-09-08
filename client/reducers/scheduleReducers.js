@@ -5,6 +5,8 @@ const initialState = {
   studentId: null,
   studentName: '',
   parentName:'',
+  teacherName: '',
+  teacherId: '',
   teacherData: [
     {
       name: '',
@@ -75,10 +77,17 @@ export const scheduleSlice = new createSlice({
         '6:50PM - 7:00pm',]}];
       console.log(state.teacherData, state.studentName);
       // console.log('loginSuccess');
+    },
+    teacherSuccess: (state, action) => {
+      state.teacherData = action.payload.appointment;
+      state.teacherName = action.payload.teacherName;
+      state.teacherId = action.payload.teacherId;
+      console.log(state.teacherData);
+      console.log(state.teacherName);
     }
   },
 });
 
-export const { handleChange, submit, logout, loginSuccess } = scheduleSlice.actions;
+export const { handleChange, submit, logout, loginSuccess, teacherSuccess } = scheduleSlice.actions;
 
 export default scheduleSlice.reducer;
