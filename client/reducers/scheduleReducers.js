@@ -4,6 +4,7 @@ import axios from 'axios';
 const initialState = {
   studentId: null,
   studentName: '',
+  parentName:'',
   teacherName: '',
   teacherId: '',
   teacherData: [
@@ -17,6 +18,7 @@ const initialState = {
         '6:40PM - 6:50pm',
         '6:50PM - 7:00pm',
       ],
+      teacherId: ''
     },
   ],
   appointmentTime: 'None',
@@ -65,7 +67,8 @@ export const scheduleSlice = new createSlice({
     loginSuccess: (state, action) => {
       console.log(action)
       state.studentName = action.payload.childInfo[0].childName;
-      state.teacherData = [{name: action.payload.childInfo[0].teacherId, availability: [ 
+      state.parentName = action.payload.parentName;
+      state.teacherData = [{teacherId:action.payload.childInfo[0].teacherId, name: action.payload.childInfo[0].teacherName, availability: [ 
         '6:00PM - 6:10pm',
         '6:10PM - 6:20pm',
         '6:20PM - 6:30pm',

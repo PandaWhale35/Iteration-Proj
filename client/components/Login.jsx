@@ -12,6 +12,7 @@ const Login = (props) => {
   const { show, showError, toggleSignup, loginError } = props;
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  let loginType;
 
   const submitGetRequest = (e) => {
 
@@ -26,25 +27,48 @@ const Login = (props) => {
       email: e.target.emailforForm.value,
       password: e.target.password.value
     };
-    fetch('/teacher/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body)
-    })
-      .then(res => res.json())
-      .then(res => {
-        // const payload = { parentName: res.parentName, childInfo: res.childInfo };
-        const payload = { teacherName: res.teacherName, appointment: res.appointment };
-        console.log(payload)
-        dispatch(teacherSuccess(payload));
-        navigate('/schedule');
+    if (loginType === 'Parent') {
+      fetch('/parents/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body)
       })
-      .catch(err => {
-        console.log(err);
-        loginError();
-      });
+        .then(res => res.json())
+        .then(res => {
+          const payload = { parentName: res.parentName, childInfo: res.childInfo };
+          console.log(payload)
+          dispatch(loginSuccess(payload));
+          return navigate('/schedule');
+        })
+        .catch(err => {
+          console.log(err);
+          return loginError();
+        });
+    }
+    if (loginType === 'Teacher') {
+      fetch('/teacher/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body)
+      })
+        .then(res => res.json())
+        .then(res => {
+          const payload = { teacherName: res.teacherName, appointment: res.appointment };
+          console.log(payload);
+          dispatch(teacherSuccess(payload));
+          return; // navigate('/schedule');
+        })
+        .catch(err => {
+          console.log(err);
+          return loginError();
+        });
+    }
+
+
   };
 
 
@@ -87,8 +111,18 @@ const Login = (props) => {
           fullWidth
           variant="contained"
           sx={{ mt: 3, mb: 2 }}
+          onClick = {() => loginType = 'Parent'}
         >
-          Log In
+          Parent Log In
+        </Button>
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          sx={{ mt: 3, mb: 2 }}
+          onClick = {() => loginType = 'Teacher'}
+        >
+          Teacher Log In
         </Button>
         <Grid container>
           <Button variant="text" onClick={toggleSignup}>
