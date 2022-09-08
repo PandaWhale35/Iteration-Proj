@@ -17,9 +17,10 @@ export const TeacherContainer = (props) => {
   function onClick(e){
     e.preventDefault();
     const index = e.target.id
-    const array = [...teacherState];
+    let array = [...teacherState];
     const apptObj = teacherState[e.target.id]
     console.log(e)
+   
     const body = {
       type: 'delete',
       teacherId: teacherId,
@@ -27,8 +28,13 @@ export const TeacherContainer = (props) => {
       parentName:   apptObj.parentName  ,
       time:   apptObj.time   ,
     }
-    if(array.length === 1) setTeacherState([]);
-    else {setTeacherState(array.splice(index, 1))}
+    array.splice(index, 1)
+    console.log(array.length)
+    console.log('teacherState', teacherState)
+    if(array.length === 0) setTeacherState([]);
+    
+    else {setTeacherState(array)};
+    console.log('teacherState', teacherState);
     fetch('/teacher/updatetimes', {
       method: 'POST',
       headers: {
