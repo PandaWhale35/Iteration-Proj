@@ -38,12 +38,13 @@ teacherController.getTeacher = async (req, res, next) => {
 ///assuming this is finding teacher available time slots by teacher id stored on parent => child then sending back name and taken slots
 
 teacherController.getAppointments = async(req, res, next) => {
-  const {teacherId} = req.body.teacherId;
+  const {teacherId} = req.body//.teacherId;
 
   const foundTeacher = await Teacher.findOne({teacherId: teacherId});
 
-  res.locals.teacherinfo = {teacherName: foundTeacher.teacherName, appointments: foundTeacher.appoinment};
+  res.locals.teacherinfo = {teacherName: foundTeacher.teacherName, appointments: foundTeacher.appointment};
   res.locals.teacherdoc = foundTeacher;
+  
   return next();
 };
 
