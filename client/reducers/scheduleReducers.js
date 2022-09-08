@@ -61,15 +61,17 @@ export const scheduleSlice = new createSlice({
       state = initialState;
     },
     loginSuccess: (state, action) => {
-      state.studentName = action.payload.studentName;
-      state.teacherData = [{name: action.payload.teacherData[0], availability: [ 
+      console.log(action)
+      state.studentName = action.payload.childInfo[0].childName;
+      state.teacherData = [{name: action.payload.childInfo[0].teacherId, availability: [ 
         '6:00PM - 6:10pm',
         '6:10PM - 6:20pm',
         '6:20PM - 6:30pm',
         '6:30PM - 6:40pm',
         '6:40PM - 6:50pm',
         '6:50PM - 7:00pm',]}];
-      console.log(state.teacherData);
+      console.log(state.teacherData, state.studentName);
+      // console.log('loginSuccess');
     }
   },
 });
