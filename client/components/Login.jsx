@@ -5,6 +5,7 @@ import SchoolIcon from '@mui/icons-material/School';
 import Error from './Error';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { loginSuccess } from '../reducers/scheduleReducers';
+import {teacherSuccess} from '../reducers/scheduleReducers';
 
 const Login = (props) => {
 
@@ -25,7 +26,7 @@ const Login = (props) => {
       email: e.target.emailforForm.value,
       password: e.target.password.value
     };
-    fetch('/parents/login', {
+    fetch('/teacher/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -34,9 +35,10 @@ const Login = (props) => {
     })
       .then(res => res.json())
       .then(res => {
-        const payload = { parentName: res.parentName, childInfo: res.childInfo };
+        // const payload = { parentName: res.parentName, childInfo: res.childInfo };
+        const payload = { teacherName: res.teacherName, appointment: res.appointment };
         console.log(payload)
-        dispatch(loginSuccess(payload));
+        dispatch(teacherSuccess(payload));
         navigate('/schedule');
       })
       .catch(err => {
