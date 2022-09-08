@@ -4,9 +4,11 @@ import SchoolIcon from '@mui/icons-material/School';
 import { useSelector } from 'react-redux';
 import { AppointmentSelectorDisplay } from '../components/AppointmentSelectorDisplay';
 
+
 export const MainContainer = (props) => {
   const studentName = useSelector((state) => state.schedule.studentName);
   const teacherData = useSelector((state) => state.schedule.teacherData);
+ 
   const teacherAppointmentSelectors = [];
   teacherData.forEach((teacher, i) => {
     teacherAppointmentSelectors.push(
