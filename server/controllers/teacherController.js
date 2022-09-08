@@ -14,22 +14,22 @@ teacherController.addTeacher = async (req, res, next) => {
     appointment: []
   });
   res.locals.teacher = newTeacher;
-  console.log(newTeacher)
+  console.log(newTeacher);
   return next();
 };
 
 //logs in
 teacherController.getTeacher = async (req, res, next) => {
-  const teachers = await Teacher.findOne({teacherId: 1});
-  console.log(teachers);
+  // const teachers = await Teacher.findOne({teacherId: 1});
+  // console.log(teachers);
   // console.log(req.body)
-  // const {email, password} = req.body;
+  const {email, password} = req.body;
   
-  // const foundTeacher = await Teacher.findOne({email: email});
+  const foundTeacher = await Teacher.findOne({email: email});
   
-  // if(foundTeacher.password !== password) return next({message: 'invalid password'});
+  if(foundTeacher.password !== password) return next({message: 'invalid password'});
   
-  // res.locals.teacher = foundTeacher;
+  res.locals.teacher = foundTeacher;
   return next();
 };
 
