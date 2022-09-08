@@ -22,7 +22,7 @@ router.post('/findteacher', teacherController.getAppointments, (req, res) =>{
 });
 
 
-router.post('/updatetimes', teacherController.getAppointments, teacherController.updateAppointment, (req, res)=>{
+router.post('/updatetimes', teacherController.updateAppointment, (req, res)=>{
   return res.status(200).json(res.locals.teacherinfo);
 });
 

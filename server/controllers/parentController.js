@@ -21,7 +21,7 @@ parentController.addParent = async (req, res, next) => {
 
 //finds parent by email and checks if password matches
 parentController.getParent = async (req, res, next) => {
-  console.log('Starting .getParent')
+  console.log('Starting .getParent');
   try{
     console.log(req.body, 'req body');
     const {email, password} = req.body;

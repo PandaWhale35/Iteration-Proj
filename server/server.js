@@ -11,7 +11,9 @@ const teacherRouter = require('./routes/teacherRouter');
 
 
 const PORT = 3000;
-
+// 'mongodb://localhost/Users'
+//'mongodb+srv://iteration:JL4iDUgGu4lAHrBS@iteration.b4cwddb.mongodb.net/?retryWrites=true&w=majority'
+//mongodb+srv://adam:testing123@cluster0.ywmiril.mongodb.net/?retryWrites=true&w=majority
 mongoose.connect('mongodb+srv://iteration:JL4iDUgGu4lAHrBS@iteration.b4cwddb.mongodb.net/?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
