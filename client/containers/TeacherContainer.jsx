@@ -19,7 +19,7 @@ export const TeacherContainer = (props) => {
     const index = e.target.id
     let array = [...teacherState];
     const apptObj = teacherState[e.target.id]
-    console.log(e)
+    console.log('teacherId', teacherId);
    
     const body = {
       type: 'delete',
@@ -33,7 +33,7 @@ export const TeacherContainer = (props) => {
     console.log('teacherState', teacherState)
     if(array.length === 0) setTeacherState([]);
     
-    else {setTeacherState(array)};
+    else {setTeacherState(array)}
     console.log('teacherState', teacherState);
     fetch('/teacher/updatetimes', {
       method: 'POST',
@@ -42,7 +42,7 @@ export const TeacherContainer = (props) => {
       },
       body: JSON.stringify(body)
     })
-    .then(res => res.json())
+    // .then(res => res.json())
     .then(res => {
       console.log('response', res);
     })
