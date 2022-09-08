@@ -16,9 +16,8 @@ class App extends Component {
         <Routes>
           <Route exact path="/" element={<HomeContainer login={login} signup={signup} />} />
           
-          {/* <Route exact path="/schedule" element={<MainContainer studentId={'studentId'}/>} /> */}
-          <Route exact path="/schedule" element={<MainContainer />} />
-          <Route exact path="/teacherhome" element={<TeacherContainer />} />
+          <Route exact path="/schedule" element={<MainContainer studentId={'studentId'}/>} />
+          <Route exact path="/scheduleteacher" element={<TeacherContainer />} />
          
         </Routes>
       </Router>

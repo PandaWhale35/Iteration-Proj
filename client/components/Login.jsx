@@ -63,7 +63,7 @@ const Login = (props) => {
           const payload = { teacherName: res.teacherName, appointment: res.appointment };
           // console.log(payload);
           dispatch(teacherSuccess(payload));
-          return navigate('/teacherhome');
+          return  navigate('/scheduleteacher');
         })
         .catch(err => {
           console.log(err);
