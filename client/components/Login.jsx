@@ -60,7 +60,7 @@ const Login = (props) => {
       })
         .then(res => res.json())
         .then(res => {
-          const payload = { teacherName: res.teacherName, appointment: res.appointment };
+          const payload = { teacherName: res.teacherName, teacherId: res.teacherId, appointment: res.appointment };
           // console.log(payload);
           dispatch(teacherSuccess(payload));
           return  navigate('/scheduleteacher');

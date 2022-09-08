@@ -81,6 +81,7 @@ export const scheduleSlice = new createSlice({
       state.teacherId = action.payload.teacherId;
       console.log(state.teacherData);
       console.log(state.teacherName);
+      console.log(state.teacherId)
     }
   },
 });

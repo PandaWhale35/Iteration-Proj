@@ -39,7 +39,7 @@ teacherController.getTeacher = async (req, res, next) => {
 
 teacherController.getAppointments = async(req, res, next) => {
   const {teacherId} = req.body//.teacherId;
-
+ 
   const foundTeacher = await Teacher.findOne({teacherId: teacherId});
 
   res.locals.teacherinfo = {teacherName: foundTeacher.teacherName, appointments: foundTeacher.appointment};
@@ -72,11 +72,11 @@ teacherController.updateAppointment = async(req,res,next)=>{
     }
     if (type === 'delete') {
       console.log('in delete');
-
+      console.log(teacherId)
  
       
-      Teacher.findOneAndUpdate({ teacherId: teacherId }, { $pull: { appointment: { time: time, childName: childName, parentName: parentName } } }, { new: true })
-        .then(data => res.locals.teacherinfo = data.appointment)
+      Teacher.findOneAndUpdate({ teacherId: teacherId }, { $pull: { appointment: { time: time, childName: childName, parentName: parentName } } })
+        .then(data => res.locals.teacherinfo = data)
         .catch(err => console.log(err));
 
       return next();
