@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import axios from 'axios';
 import {
   Box,
   Typography,
@@ -14,6 +15,9 @@ import { submit, handleChange } from '../reducers/scheduleReducers';
 
 export const AppointmentSelectorDisplay = (props) => {
   const studentName = useSelector((state) => state.schedule.studentName);
+  const teacher = useSelector(state => state.schedule.teacherData[0]);
+  const parentName = useSelector(state => state.schedule.parentName);
+  // console.log(teacher);
   const [isActive, setIsActive] = useState(false);
   const appointmentTime = useSelector(
     (state) => state.schedule.appointmentTime
@@ -82,7 +86,8 @@ export const AppointmentSelectorDisplay = (props) => {
           variant="contained"
           onClick={() => {
             setIsActive((current) => !current);
-            dispatch(submit(payload));
+            addAppt(appointmentTime, teacher, studentName, parentName)
+            // dispatch(submit(payload));
           }}
         >
           Submit
@@ -91,3 +96,18 @@ export const AppointmentSelectorDisplay = (props) => {
     </Box>
   );
 };
+
+
+function addAppt(appointmentTime, teacher, studentName, parentName) {
+  // console.log(appointmentTime, teacher, studentName, parentName);
+  axios.post('/teacher/updatetimes', {
+    type:'add',
+    teacherId: teacher.teacherId,
+    childName: studentName,
+    parentName: parentName,
+    time: appointmentTime,
+  }).then(data => console.log(data))
+    .catch((err) => {
+      console.log(err);
+    });
+}
