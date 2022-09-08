@@ -5,30 +5,51 @@ import { useSelector } from 'react-redux';
 import { AppointmentSelectorDisplay } from '../components/AppointmentSelectorDisplay';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useState } from 'react';
 
 export const TeacherContainer = (props) => {
  
   const teacherData = useSelector((state)=> state.schedule.teacherData);
   const teacherName = useSelector((state)=> state.schedule.teacherName);
   const teacherId = useSelector((state)=> state.schedule.teacherId);
+  const [teacherState, setTeacherState] = useState(teacherData);
   
   function onClick(e){
     e.preventDefault();
-    console.log(e.target.id)
+    const index = e.target.id
+    const array = [...teacherState];
+    const apptObj = teacherState[e.target.id]
     console.log(e)
-    // const body = {
-    //   type: 'delete',
-    //   teacherId: teacherId,
-    //   childName:    ,
-    //   parentName:     ,
-    //   time:      ,
-    // }
+    const body = {
+      type: 'delete',
+      teacherId: teacherId,
+      childName:  apptObj.childName ,
+      parentName:   apptObj.parentName  ,
+      time:   apptObj.time   ,
+    }
+    if(array.length === 1) setTeacherState([]);
+    else {setTeacherState(array.splice(index, 1))}
+    fetch('/teacher/updatetimes', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body)
+    })
+    .then(res => res.json())
+    .then(res => {
+      console.log('response', res);
+    })
+    .catch(err => {
+      console.log(err);
+    })
 
   }
 
   const teacherAppointments = [];
-  teacherData.forEach((appointment, i)=> {
+  teacherState.forEach((appointment, i)=> {
     teacherAppointments.push(
+      <form id={i} onSubmit={onClick}>
      <ListItem key={i} sx={{
       display: 'flex',
       justifyContent: 'space-evenly',
@@ -42,11 +63,12 @@ export const TeacherContainer = (props) => {
       <ListItemText
         primary = 'Parent Name'
         secondary= {appointment.parentName}/>
-        <IconButton edge="end" aria-label="delete" id={i} onClick={onClick}>
+        <IconButton edge="end" aria-label="delete" id={i} type='submit'>
                       <DeleteIcon />
                     </IconButton>
 
      </ListItem>
+     </form>
     )
   });
 
